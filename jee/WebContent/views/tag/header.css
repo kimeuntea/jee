@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+@IMPORT url("../common/common.css");
+img{
+	border: none;
+}
+#wrap{
+	width: 100%;
+	text-align: left;/*글자정렬 : 왼쪽  */
+	margin: 0;
+	margin-right: auto;/*환경에 맞게 자동설정  */
+	margin-left: auto;
+	background-image:url("../../images/Koala.jpg");
+	background-repeat: repeat-y;
+	/*만약 배경이미지가 작으면 이미지 반복으로 채우겟다. */
+	min-height: 750px;
+	/* 모니터에따라 신축성있게 헤더가 축소되지만 
+	최소한 750px 은 유지하고 그이하가 되면 이미지가 잘리도록 
+	하겠다. */
+	
+}
+#top{
+	height: 180px;
+	margin: 0;
+	padding: 0;
+	
+}
+.clear{
+	clear: both;
+}
+#logo{
+	float: left;
+	margin: 40px  0  0 40px;
+	width: 270px;
+	
+}
+#login{
+float: right;
+margin: 20px 60px ;
+font-family: Arial, helvetica;
+font-size: 12px;
+word-spacing: 5px;	
+}
+#login a{
+	text-decoration: none;
+	color: #333;
+}
+#login a:HOVER {
+	color: #F90;
+}
+nav#topMenu{
+	width: 600px;
+	margin: 50px 20px 0 0;
+	float: right;
+}
+nav#topMenu ul{
+	list-style: none;
+	font-family:  Arial, Helvetica ,Sans-serif;
+	font-size: 13px;
+	font-weight: 100;
+	color: #333;
+}
+nav#topMenu ul li{
+	float: left;
+	margin: 0 5px;
+	border-bottom-color: #8000ff;
+}
+nav#topMenu a{
+	display: block;
+	height: 20px;
+	padding: 10px;
+	text-decoration: none;
+	color: #333;
+}
+nav#topMenu a:HOVER{
+	color: #ff0000;
+}
+footer hr{
+	width: 100%;
+	margin: 0 0 0 15px;
+}
+pre{
+	text-align: center;
+	padding-top: 25px
+}
