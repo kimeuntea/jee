@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <jsp:forward page="views/home/template.jsp"/>
+ <jsp:forward page="views/model1/onlyContent.jsp"/>
 </body>
 </html>
 

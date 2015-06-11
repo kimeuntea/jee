@@ -10,6 +10,7 @@
 </style>
 </head>
 <body>
+<div id="wrap">
 	<header>
 		<h3>헤더</h3>
 	</header>
@@ -21,5 +22,6 @@
 	<footer>
 	<h3>푸터</h3>
 	</footer>
+	</div>
 </body>
 </html>

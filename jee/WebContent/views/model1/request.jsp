@@ -14,10 +14,11 @@ request 기본 객체가 제공하는 기능
 3.파라미터 ★★★★
 4.헤더읽기
 5.쿠키읽기
-6. 속성처리 기능 ★★★★★
+6. 속성처리 기능 ★★★★★ 
 
 
 -->
+요청 URI  = <%=request.getRequestURL() %>
 요청정보 인코딩 = <%=request.getCharacterEncoding() %>
 컨텍스트 경로  = <%=request.getContextPath()%>
 
