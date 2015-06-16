@@ -12,11 +12,13 @@
 			<legend>주문내용</legend>
 			<ol>
 				<li>
-				<label for="prod">영화티켓</label>
+				<label for="prod">좌석</label>
 				<input id="prod" type="text" size="25"/>
 				</li>
 				<li>
-				<label for="num">예약자리수</label>
+				<label for="num">첫번째 수</label>
+				<input id="num" name="num" type="number" min="1" max="5" value="1" />
+				<label for="num">두번째 수</label>
 				<input id="num" name="num" type="number" min="1" max="5" value="1" />
 				</li>
 			</ol>
@@ -30,7 +32,6 @@
 			<input type="time" name="time" id="time" /></li>
 			
 		</ol>
-		
 		</fieldset>
    <input type="submit" value="등록">
 	</form>

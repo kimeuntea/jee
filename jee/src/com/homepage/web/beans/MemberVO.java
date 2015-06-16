@@ -1,6 +1,6 @@
 package com.homepage.web.beans;
 
-public class MemberBean {
+public class MemberVO {
 	private String name;
 	private String addr;
 	private int age;
@@ -36,4 +36,6 @@ public class MemberBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
 }
