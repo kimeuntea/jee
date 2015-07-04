@@ -1,7 +1,9 @@
 package com.homepage.web.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,14 +21,38 @@ import com.homepage.web.services.MemberService;
  @Author : 
  회원가입과 로그인 담당하는 컨트롤러
 */
-@WebServlet({"/login.do","/join.do"})
+@WebServlet({"/login.do","/join.do","/member/searchIdForm.do","/member/searchPassForm.do",
+	"/member/searchAllMembers.do"})
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     HashMap<String, String>map = new HashMap<String, String>();
 	MemberBean bean = new MemberBean();
-    MemberService service = new MemberServiceImpl();
+    MemberService service =MemberServiceImpl.getInstance();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		String path=request.getServletPath();
+		String url="";
+		switch (path) {
+		  case "/member/searchIdForm.do":
+	        	System.out.println("1");
+	        	url="/views/model2/searchIdForm.jsp";
+	        	break;
+	        case "/member/searchPassForm.do":
+	        	url="/views/model2/searchPassForm.jsp";
+	        	break;
+	        case "/member/searchAllMembers.do":
+	        	List<MemberBean>list = new ArrayList<MemberBean>();
+	        	list = service.getList();
+	        	request.setAttribute("memberlist",list);
+	        	url="/views/model2/searchAllMembers.jsp";
+	        	break;
+		default:
+			break;
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+		dispatcher.forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,24 +63,36 @@ public class MemberController extends HttpServlet {
 		
 		String url ="";
 		int result=0;
+		String joinmsg = null;
 		switch (path) {
 		case "/join.do":
 			
 			String id= request.getParameter("id");
 			String pass= request.getParameter("pass");
 			String name= request.getParameter("name");
-			int age= Integer.parseInt(request.getParameter("age"));
-			String address= request.getParameter("address");
-		    
+			String age= request.getParameter("age");
+			String email= request.getParameter("email");
+		    bean.setId(id);
+		    bean.setName(name);
+		    bean.setAge(age);
+		    bean.setEmail(email);
+		    bean.setPassword(pass);
+			
 			map.put("id", id);
 			map.put("pass", pass);
 			map.put("name", name);
 			map.put("age", (request.getParameter("age")));
-			map.put("address", address);
+			map.put("email", email);
 			
-			service.join(id, pass, name, age, address);
-	
-			url ="views/model2/memberForm.jsp";
+			result=service.join(bean);
+			if(result !=0){
+				joinmsg=name+"회원가입";
+			}else{
+				
+				joinmsg="회원가입실패";
+			}
+			request.setAttribute("msg", joinmsg);
+	        url ="views/model2/main.jsp";
 			break;
         case "/login.do":
         	request.setAttribute("id", map.get("id"));
@@ -73,6 +111,7 @@ public class MemberController extends HttpServlet {
 				url="/views/model2/member.jsp";
 			}
 			break;
+      
 		default:
 			break;
 		}

@@ -17,9 +17,7 @@
 			<label for="wanted">원하는 예약일</label>
 			<input id="wanted" name="wanted" type="date" />
 			<input type="time" name="time" id="time" /></li>
-			
 		</ol>
-		
 		</fieldset>
 		<input type="submit" value="전 송"/>
 
@@ -34,9 +32,9 @@ if(request.getAttribute("seat")==null){
 	for (int i = 0; i < defaultSeat.length; i++) {
 	    for (int j = 0; j < defaultSeat[i].length; j++) {
 	        if (seat[i][j] == null) {%>
-	         ㅁ <%=i+1%>0<%=j+1%>호            
+	         ㅁ <%=i+1%> - <%=j+1%>         
 	        <%} else {%>
-	         ■ <%=i+1%>0<%=j+1%>호
+	         ■ <%=i+1%> - <%=j+1%>
 	       <%}
 	    }%>
 	 <br />  
@@ -46,9 +44,9 @@ if(request.getAttribute("seat")==null){
 	for (int i = 0; i < seat.length; i++) {
 	    for (int j = 0; j < seat[i].length; j++) {
 	        if (seat[i][j] == null) {%>
-	         ㅁ <%=i+1%>0<%=j+1%>호            
+	         ㅁ <%=i+1%> - <%=j+1%>            
 	        <%} else {%>
-	         ■ <%=i+1%>0<%=j+1%>호
+	         ■ <%=i+1%> - <%=j+1%>
 	       <%}
 	    }%>
 	 <br />  
@@ -56,6 +54,7 @@ if(request.getAttribute("seat")==null){
 }
 %>
 </div>
+
 <div>
 <form action="<%=request.getContextPath()%>/reservation/checkIn.do">
 		<fieldset>
@@ -77,8 +76,29 @@ if(request.getAttribute("seat")==null){
 		
    <input type="submit" value="등록">
 	</form>
-	<a href="<%=request.getContextPath()%>/reservation/showStatus.do">요기</a>
+	
+	<form action="<%=request.getContextPath()%>/reservation/checkOut.do">
+		<fieldset>
+			<legend>주문취소</legend>
+			<ol>
+				<li>
+				<label for="prod">좌석</label>
+				<input type="text" name="id" id="id" placeholder="아이디를 입력하세요 "/>
+				</li>
+				<li>
+				<label for="num">열번호</label>
+				<input id="floor" name="floor" type="number" min="1" max="5" value="1" />
+				<br />
+				<label for="num">행번호</label>
+				<input id="row" name="row" type="number" min="1" max="5" value="1" />
+				</li>
+			</ol>
+		</fieldset>
+		
+   <input type="submit" value="취소">
+   </form>
 </div>
 </div>
+<%=request.getAttribute("msg") %>
 </body>
 </html>

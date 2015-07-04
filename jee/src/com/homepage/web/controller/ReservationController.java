@@ -23,7 +23,7 @@ import com.homepage.web.services.ReservationService;
 */@WebServlet({"/reservation/inputCheck.do","/reservation/checkIn.do","/reservation/checkOut.do"
 		,"/reservation/showStatus.do"})
 public class ReservationController extends HttpServlet {
-	 public static String[][] seat = new String[3][5]; 
+	public static String[][] seat = new String[3][5]; 
 	private static final long serialVersionUID = 1L;
     ReservationService service = new ReservationServiceImpl();
     public ReservationController() {
@@ -41,24 +41,30 @@ public class ReservationController extends HttpServlet {
 		String path = request.getServletPath();
         switch (path) {
         case "/reservation/checkIn.do":
-        	floor = Integer.parseInt(request.getParameter("floor"));
-        	row=Integer.parseInt(request.getParameter("row"));
+        	floor = Integer.parseInt(request.getParameter("floor"))-1;
+        	row=Integer.parseInt(request.getParameter("row"))-1;
         	id = request.getParameter("id");
         	msg=service.checkIn(floor,row,id);
-        	seat = service.checkIn();
+        	seat[floor][row] = id;
+        	//seat = service.checkIn();
         	request.setAttribute("seat",seat);
         	request.setAttribute("msg",msg);
+        	System.out.println(msg);
         	
         	RequestDispatcher dispatcher = request.getRequestDispatcher("/views/model2/reservationForm.jsp");
            	dispatcher.forward(request, response);
             break; // 체크인
         case "/reservation/checkOut.do":
+        	floor = Integer.parseInt(request.getParameter("floor"))-1;
+        	row=Integer.parseInt(request.getParameter("row"))-1;
+        	id = request.getParameter("id");
         	msg=service.checkOut(floor,row,id);
+        	seat[floor][row] =null;
         	request.setAttribute("msg", msg);
-        	   RequestDispatcher dispatcher1 = request.getRequestDispatcher("/views/model2/reservationForm.jsp");
+        	request.setAttribute("seat", seat);
+        	RequestDispatcher dispatcher1 = request.getRequestDispatcher("/views/model2/reservationForm.jsp");
            	dispatcher1.forward(request, response);
             break; // 체크아웃
-            
         case "/reservation/showStatus.do":
         	System.out.println("2");
         	String[][]seat =service.showStatus();

@@ -7,7 +7,7 @@ import com.homepage.web.services.ReservationService;
 public class ReservationServiceImpl implements ReservationService {
 	 
 	    public static String[][] seat = new String[3][5]; // 투숙객 이름
-	   
+	    
 /*
 좌석 위치값이 DB  에 저장할 필요는 없다.
 하지만 예약번호가 생성되면 좌석 위치값 + 예약시간 +예약자가
@@ -23,9 +23,6 @@ subString()같은 메소드를 활용하면 쉽게 얻을 수 있읅 것이다.
 		// TODO Auto-generated method stub
 		String msg="";  
 	            try {
-	 
-	            	               
-	 
 	                if (seat[floor - 1][row - 1] != null) { // 이미 이름이 있다면(예약중)
 	                  msg = "그방은 이미 예약중입니다.";
 	            
@@ -37,47 +34,30 @@ subString()같은 메소드를 활용하면 쉽게 얻을 수 있읅 것이다.
 	                    seat[floor - 1][row- 1] = id;
 	 
 	                   msg =id + "님 checkIn 완료 되셨습니다";
-	                    
-	 
 	                }
 	            } catch (Exception ex) {
 	            	 System.out.println("ReservationServiceImpl.chcekIn() 에서 에러발생");
 	            }
 	 return msg;
-	        
-
 	}
 	public String[][] checkIn() {
 		// TODO Auto-generated method stub
-		
 	 return seat;
-	       
 	}
 
 	@Override
 	public String checkOut(int floor,int row ,String id) {
 		// TODO Auto-generated method stub
 		String msg = "";
-	      
 	            try {
-	 
-	               //몇호실에서 퇴실
-	                //floor = this.inputCheck(floor, 1, 3);
-	                if (floor == 0){}
-	            
-	              //몇호실에서 퇴실
-	               // room = this.inputCheck(row, 1, 5);
-	                if (row == 0){}
-	               
-	 
 	                if (seat[floor - 1][row - 1] == null) { // 방에 이름이 없다면..
 	                	msg ="그 방은 이미 빈방입니다"; // 이미 빈방입니다 메세지
 	                  
 	                } else {
-	                   id = seat[floor - 1][row - 1]; // 방에 이름이 있다면 해당 배열주소
+	                   id = seat[floor][row]; // 방에 이름이 있다면 해당 배열주소
 	                                                            // null처리
 	                    seat[floor - 1][row - 1] = null;
-	 
+	                    
 	                    msg =id + "님 checkOut 완료 되셨습니다";
 	                }
 	            } catch (Exception ex) {
